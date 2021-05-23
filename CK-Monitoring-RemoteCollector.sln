@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{FFD1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BC.CK.Monitoring.ReceiverFunctionApp", "BC.CK.Monitoring.ReceiverFunctionApp\BC.CK.Monitoring.ReceiverFunctionApp.csproj", "{EF22AD8B-947B-4C69-A589-2794786AAB1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeCakeBuilder", "CodeCakeBuilder\CodeCakeBuilder.csproj", "{40EE30D7-9988-4682-9B37-985A7EAFA71F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{EF22AD8B-947B-4C69-A589-2794786AAB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF22AD8B-947B-4C69-A589-2794786AAB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF22AD8B-947B-4C69-A589-2794786AAB1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40EE30D7-9988-4682-9B37-985A7EAFA71F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40EE30D7-9988-4682-9B37-985A7EAFA71F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40EE30D7-9988-4682-9B37-985A7EAFA71F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40EE30D7-9988-4682-9B37-985A7EAFA71F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1FDDE166-B38B-41B7-AEFA-479D97BB3136} = {FFD17E5D-7FA0-4DB8-9429-290C45EBA6F2}

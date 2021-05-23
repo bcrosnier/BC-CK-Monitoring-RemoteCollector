@@ -1,0 +1,19 @@
+version: build{build}
+image: Visual Studio 2019
+clone_folder: C:\dev\CK-Monitoring-RemoteCollector
+branches:
+  only:
+    - develop
+build_script:
+  - dotnet run --project CodeCakeBuilder -nointeraction
+test: off
+install: []
+artifacts:
+  - path: '**\*.log'
+    name: Log file
+  - path: '**\*.trx'
+    name: Visual studio test results file
+  - path: '**\Tests\**\TestResult*.xml'
+    name: NUnit tests result files
+  - path: '**Tests\**\Logs\**\*'
+    name: Log files
