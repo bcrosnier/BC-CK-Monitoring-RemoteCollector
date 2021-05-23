@@ -1,0 +1,19 @@
+{
+    "version": "2.0",
+    "tracing": {
+        "consoleLevel": "off"
+    },
+    "logging": {
+        "applicationInsights": {
+            "samplingSettings": {
+                "excludedTypes": "request",
+                "isEnabled": true
+            }
+        },
+    },
+    "extensions": {
+        "http": {
+            "routePrefix": "api"
+        }
+    }
+}

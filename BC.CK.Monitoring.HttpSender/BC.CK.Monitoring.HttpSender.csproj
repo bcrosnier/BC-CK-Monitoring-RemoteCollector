@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <RootNamespace>CK.Monitoring.HttpSender</RootNamespace>
+        <PackageId>BC.CK.Monitoring.HttpSender</PackageId>
+        <Authors>bcrosnier</Authors>
+        <Description>A CK-Monitoring handler that sends log entries over HTTP.</Description>
+        <Company>Signature Code</Company>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="CK.Monitoring" Version="14.1.0"/>
+    </ItemGroup>
+
+</Project>
