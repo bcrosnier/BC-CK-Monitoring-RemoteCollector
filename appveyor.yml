@@ -4,6 +4,11 @@ clone_folder: C:\dev\CK-Monitoring-RemoteCollector
 branches:
   only:
     - develop
+environment:
+  NUGET_ORG_PUSH_API_KEY:
+    secure: bTjcu9jv6fW17Xyf48cZzXe7D3BRuuymVh0buOhTqV46kv9kdxil+PJlIZh4eKLe
+  AZURE_FEED_SIGNATURE_OPENSOURCE_PAT:
+    secure: wuVvfzFFXup8cbFMOs/WQh5EH5c6X66RiXLeg3E5y1xBP1XOFOWYtAhOR9elJkgzI29kJn9bvgb9x6sZrQT/7w==
 build_script:
   - dotnet run --project CodeCakeBuilder -nointeraction
 test: off
