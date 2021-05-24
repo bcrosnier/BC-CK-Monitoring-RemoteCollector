@@ -1,6 +1,7 @@
 ﻿using CK.Core;
 using CK.Monitoring.Handlers;
 using CK.Monitoring.ReceiverFunctionApp;
+using CK.Monitoring.ReceiverFunctionApp.Services;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;

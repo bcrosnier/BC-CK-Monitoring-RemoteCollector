@@ -1,13 +1,15 @@
-﻿using System.IO;
+﻿using CK.Core;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CK.Core;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
+using CK.Monitoring.ReceiverFunctionApp.Model;
+using CK.Monitoring.ReceiverFunctionApp.Services;
 
-namespace CK.Monitoring.ReceiverFunctionApp
+namespace CK.Monitoring.ReceiverFunctionApp.Triggers
 {
     public class ProcessCkmonQueueTrigger
     {
@@ -18,9 +20,9 @@ namespace CK.Monitoring.ReceiverFunctionApp
             _logEntryCollector = logEntryCollector;
         }
 
-        [FunctionName("ProcessCkmonQueueTrigger")]
+        [FunctionName(nameof(ProcessCkmonQueueTrigger))]
         public async Task RunAsync(
-            [QueueTrigger("ckmonrcvbc", Connection = "AzureWebJobsCkmon")]
+            [QueueTrigger(Constants.CkmonProcessQueueName, Connection = Constants.AzureStorageAccountName)]
             byte[] queueItem,
             ILogger log
         )

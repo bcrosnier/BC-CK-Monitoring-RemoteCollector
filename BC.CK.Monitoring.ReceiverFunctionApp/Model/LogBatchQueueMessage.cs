@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CK.Core;
 
-namespace CK.Monitoring.ReceiverFunctionApp
+namespace CK.Monitoring.ReceiverFunctionApp.Model
 {
     public class LogBatchQueueMessage
     {

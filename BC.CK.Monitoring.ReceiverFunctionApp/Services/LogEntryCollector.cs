@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,12 +10,12 @@ using Microsoft.Azure.Storage;
 using Microsoft.Azure.Storage.Blob;
 using Microsoft.Azure.WebJobs;
 
-namespace CK.Monitoring.ReceiverFunctionApp
+namespace CK.Monitoring.ReceiverFunctionApp.Services
 {
     public class LogEntryCollector
     {
-        static string AccountName => "AzureWebJobsCkmon";
-        static string BlobContainerName => "ckmon";
+        static string AccountName => Constants.AzureStorageAccountName;
+        static string BlobContainerName => Constants.AzureBlobContainerName;
 
         private bool _initialized;
         private readonly StorageAccountProvider _storageAccountProvider;
@@ -135,8 +136,60 @@ namespace CK.Monitoring.ReceiverFunctionApp
         private static string GetBlobName(string appId, ILogEntry logEntry)
         {
             return
-                $"ckmon-{LogReader.CurrentStreamVersion}/{appId}/" +
-                $"{logEntry.LogTime.TimeUtc:yyyy-MM-dd/HH}-00-00.ckmon";
+                $"ckmon/{appId}/" +
+                $"{logEntry.LogTime.TimeUtc:yyyy-MM-dd}/" +
+                $"{appId}_{logEntry.LogTime.TimeUtc:HH}-00-00.{LogReader.CurrentStreamVersion}.ckmon";
+        }
+
+        public async Task<List<string>> GetAppNamesAsync()
+        {
+            var blobsAsync = _blobContainer.ListBlobsAsync("ckmon/", false, BlobListingDetails.None);
+
+            List<string> appNames = new List<string>();
+            await foreach (var dir in blobsAsync)
+            {
+                if (dir is CloudBlobDirectory appDir)
+                {
+                    string prefix = appDir.Prefix;
+                    int idx0 = prefix.LastIndexOf('/', prefix.Length - 2) + 1;
+                    int len = prefix.Length - 1 - idx0;
+                    appNames.Add(prefix.Substring(idx0, len));
+                }
+            }
+
+            return appNames;
+        }
+
+        public async Task<List<string>> GetAppLogNamesAsync()
+        {
+            var blobsAsync = _blobContainer.ListBlobsAsync("ckmon/", false, BlobListingDetails.None);
+
+            List<string> appNames = new List<string>();
+            await foreach (var dir in blobsAsync)
+            {
+                if (dir is CloudBlobDirectory appDir)
+                {
+                    string prefix = appDir.Prefix;
+                    int idx0 = prefix.LastIndexOf('/', prefix.Length - 2) + 1;
+                    int len = prefix.Length - 1 - idx0;
+                    appNames.Add(prefix.Substring(idx0, len));
+                }
+            }
+
+            return appNames;
+        }
+
+        public async Task<List<string>> GetAppFilesAsync(string appId)
+        {
+            var blobsAsync = _blobContainer.ListBlobsAsync($"ckmon/{appId}", true, BlobListingDetails.None);
+
+            List<string> fileNames = new List<string>();
+            await foreach (var blob in blobsAsync)
+            {
+                fileNames.Add(blob.Uri.ToString());
+            }
+
+            return fileNames;
         }
     }
 }
