@@ -209,9 +209,16 @@ namespace CK.Monitoring.Handlers
             var assembly = typeof(HttpSender).Assembly;
             FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
+            string productVersion = fileVersionInfo.ProductVersion;
+            int delimiterIdx = productVersion.IndexOf('/');
+            if (delimiterIdx >= 0)
+            {
+                productVersion = productVersion.Substring(0, delimiterIdx);
+            }
+
             return new ProductInfoHeaderValue(
                 assembly.GetName().Name,
-                fileVersionInfo.ProductVersion
+                productVersion
             );
         }
     }
